@@ -3,9 +3,9 @@
 The files in this package consist of the following
 
 
-The files in this repository can be used to compile a swing javax application that demonstrates a parser that reads USITT ASCII text and then can perform one of two operations.
+The files in this repository can be used to compile a swing javax application that demonstrates a parser that reads USITT ASCII text and then can perform one of two operations.  The files include the `.classpath`, `.project` and `.settings` folder for an Eclipse project.
 
-The generic AbstractASCII parser class reads an parses a USITT ASCII string.  However, to be useful, you must override the class.  Three examples of this are included.  The ParrotASCIIParser class will simply create an output string from the input string with no manipulation.  By Modifying this class, you can perform operations on the parsed data.  For example, the HexConverterASCIIParser class overrides ParrotASCIIParser and converts levels in hexadecimal to percentage in its output.
+The generic AbstractASCII parser class reads and parses a USITT ASCII string.  However, to be useful, you must override the class.  Three examples of this are included.  The ParrotASCIIParser class will simply create an output string from the input string with no manipulation.  By Modifying this class, you can perform operations on the parsed data.  For example, the HexConverterASCIIParser class overrides ParrotASCIIParser and converts levels in hexadecimal to percentage in its output.
 
 The PatchingASCIIParser class also overrides ParrotASCIIParser and allows you to build a table of channel substitutions that are then applied to your ASCII data.  The PatchTable and PatchTableEntry classes are used to translate channels as they are added to the output.
 
