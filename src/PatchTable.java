@@ -1,0 +1,95 @@
+//
+//  PatchTable.java
+//  HexConverter
+//
+//  Created by Claude Heintz on 10/11/07.
+//  Copyright (c) 2007-2014 Claude Heintz Design. All rights reserved.
+//
+/*
+#
+#   PatchTable is free software: you can redistribute it and/or modify
+#   it for any purpose provided the following conditions are met:
+#
+#   1) Redistributions of source code must retain the above copyright notice,
+#   this list of conditions and the following disclaimer.
+#
+#   2) Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+#   3) Neither the name of the copyright owners nor the names of its contributors
+#   may be used to endorse or promote products derived from this software
+#   without specific prior written permission.
+#
+#   PatchTable.java is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+#   INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+#   PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+#   HOLDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+#   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#   OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+#   AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+#   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+#   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+import java.util.*;
+import java.lang.*;
+
+public class PatchTable {
+	Vector _v;
+	
+	public PatchTable() {
+		_v = new Vector();
+	}
+	
+	public Vector entries() {
+		return _v;
+	}
+	
+	public Vector valuesForId(String s) {
+		PatchTableEntry e;
+		Vector ov = new Vector();
+		
+		for(int i=0; i<entries().size(); i++) {
+			e = (PatchTableEntry) entries().elementAt(i);
+			if (e.matches(s)) {
+				ov.add(e.value());
+			}
+		}
+		
+		if ( ov.size() == 0 ) {
+			ov.add(s);
+		}
+		
+		return ov;
+	}
+	
+	public void setValueForID(String v, String id) {
+		PatchTableEntry e;
+		Vector ov = new Vector();
+		
+		for(int i=0; i<entries().size(); i++) {
+			e = (PatchTableEntry) entries().elementAt(i);
+			if (e.matchAndReplace(id, v)) {
+				return;
+			}
+		}
+		
+		e = new PatchTableEntry(id, v);
+		entries().add(e);
+	}
+	
+	public void addValueForID(String v, String id) {
+		PatchTableEntry e;
+		e = new PatchTableEntry(id, v);
+		entries().add(e);
+	}
+	
+	public void clearTable() {
+		entries().removeAllElements();
+	}
+}
